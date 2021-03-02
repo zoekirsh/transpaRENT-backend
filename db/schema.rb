@@ -10,17 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_005535) do
-
-  create_table "addresses", force: :cascade do |t|
-    t.string "address"
-    t.string "city"
-    t.integer "zip"
-    t.float "lat"
-    t.float "lng"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2021_03_02_034449) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -37,23 +27,25 @@ ActiveRecord::Schema.define(version: 2021_02_25_005535) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.string "title"
-    t.integer "price"
-    t.integer "sqf"
-    t.integer "bed"
-    t.integer "bath"
-    t.string "image"
+    t.string "property_id"
     t.float "lat"
     t.float "lng"
+    t.string "address"
+    t.string "city"
+    t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "address_id"
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "address"
+    t.integer "user_id"
+    t.string "city"
+    t.string "state"
+    t.integer "zipcode"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_005535) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "state"
   end
 
 end

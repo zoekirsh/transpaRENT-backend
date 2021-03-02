@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authorized
+  protect_from_forgery unless: -> { request.format.json? }
 
   def encode_token(payload)
     #hide your secret

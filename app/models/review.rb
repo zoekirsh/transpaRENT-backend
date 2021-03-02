@@ -1,4 +1,4 @@
 class Review < ApplicationRecord
-  belongs_to :addresses
+  belongs_to :address
   has_many :likes
 end

@@ -1,24 +1,35 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create, :show]
+  skip_before_action :authorized, only: [:index, :create, :show]
+
+  def index
+    @users = User.all
+
+    render json: @users, each_serializer: UserSerializer
+  end
 
   def create
+    #byebug
     user = User.create(user_params)
+
     if user.valid? 
       my_token = encode_token({user_id: user.id})
-      render json: {id: user.id, username: user.username, name: user.name, city: user.city, email: user.email, token: my_token}
+      render json: {user: UserSerializer.new(user), token: my_token}
     else
-      render json: {error: "failed to create a user"}
+      render json: {error: "username must be unique."}
     end
   end
 
   def show
-    #ADD CODE 
     user = User.find(params[:id])
-    render json: user
+
+    render json: {user: UserSerializer.new(user)}
   end
 
   def update
-    #CODE HERE
+    user = User.find(params[:id])
+    user.update(user_params)
+
+    render json: {user: UserSerializer.new(user)}
   end
 
   def destroy
@@ -27,10 +38,15 @@ class UsersController < ApplicationController
     render json: {message: "account deleted"}
   end
 
+  #logged in user
+  def profile 
+    render json: {user: UserSerializer.new(current_user)}, status: :accepted
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :name, :city, :email)
+    params.permit(:username, :password, :name, :city, :state, :email)
   end
 
 end
