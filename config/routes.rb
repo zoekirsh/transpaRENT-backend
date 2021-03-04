@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :show, :update, :destroy]
   resources :likes, only: [:create, :destroy]
-  resources :favorites, only: [:create]
+  resources :favorites, only: [:index, :create, :destroy]
   resources :reviews, only: [:index, :show, :create, :update, :destroy]
-  resources :listings, only: [:index, :create, :show]
 
   #customs for fetch
   get '/profile', to: 'users#profile'

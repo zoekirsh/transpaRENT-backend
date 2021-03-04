@@ -1,5 +1,5 @@
 class DropListingsTable < ActiveRecord::Migration[6.1]
   def change
-    drop_table :listings 
+    drop_table :listings
   end
 end
