@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/getreviews/:id', to: 'reviews#get_reviews'
+  
   resources :users, only: [:index, :show, :update, :destroy]
   resources :likes, only: [:create, :destroy]
   resources :favorites, only: [:index, :create, :destroy]
