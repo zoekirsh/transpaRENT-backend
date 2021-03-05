@@ -1,6 +1,13 @@
 class ReviewsController < ApplicationController
   skip_before_action :authorized, only: [:index, :show, :get_reviews]
 
+  def get_reviews
+    #byebug
+    reviews = Review.all.select{|r| r[:address] == params[:id] }
+
+    render json: reviews, each_serializer: ReviewSerializer
+  end
+
   def index
     @reviews = Review.all
 
@@ -24,14 +31,6 @@ class ReviewsController < ApplicationController
 
   def destroy
   end
-
-  def get_reviews
-    #byebug
-    reviews = Review.all.select{|r| r[:address] == params[:id] }
-
-    render json: reviews, each_serializer: ReviewSerializer
-  end
-
 
   private
 

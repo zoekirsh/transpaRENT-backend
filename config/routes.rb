@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/getreviews/:id', to: 'reviews#get_reviews'
-  
+  get '/favorites/:id', to: 'favorites#is_favorite'
+
   resources :users, only: [:index, :show, :update, :destroy]
   resources :likes, only: [:create, :destroy]
   resources :favorites, only: [:index, :create, :destroy]

@@ -3,6 +3,16 @@ class FavoritesController < ApplicationController
 
   def get_favorites
     #make the call to api
+    favorites = Favorite.all.select{|f| f.user_id == current_user.id}
+
+    render json: favorites, each_serializer: FavoriteSerializer
+  end
+
+  def is_favorite 
+    #byebug
+    favorite = Favorite.find_by(property_id: params[:id], user_id: current_user.id)
+    
+    render json: favorite
   end
 
   def index
@@ -14,6 +24,8 @@ class FavoritesController < ApplicationController
   def create
     #byebug
     favorite = Favorite.create(favorite_params)
+
+    #if valid
 
     render json: {favorite: FavoriteSerializer.new(favorite)}
   end
@@ -31,10 +43,3 @@ class FavoritesController < ApplicationController
   end
 
 end
-
-# save listing_id from api
-# "my listings" will make a call to api with ids 
-
-# on load of page, fetch to backend with user_id
-#backend gets the favorite ids, makes request to api with ids
-# api returns AoH with listings, forwards to frontend
