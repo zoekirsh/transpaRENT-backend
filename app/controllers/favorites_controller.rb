@@ -25,9 +25,12 @@ class FavoritesController < ApplicationController
     #byebug
     favorite = Favorite.create(favorite_params)
 
-    #if valid
+    if favorite.valid?
+      render json: {favorite: FavoriteSerializer.new(favorite)}
+    else
+      render json: {error: "Listing already liked by this user."}
+    end
 
-    render json: {favorite: FavoriteSerializer.new(favorite)}
   end
 
   def destroy
@@ -39,7 +42,7 @@ class FavoritesController < ApplicationController
   private
 
   def favorite_params 
-    params.require(:favorite).permit(:id, :user_id, :property_id)
+    params.require(:favorite).permit(:id, :user_id, :property_id, :primary_photo, :address, :price, :beds, :apartment)
   end
 
 end

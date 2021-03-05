@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_031711) do
+ActiveRecord::Schema.define(version: 2021_03_05_052549) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "property_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "primary_photo"
+    t.string "address"
+    t.string "price"
+    t.string "beds"
+    t.string "apartment"
   end
 
   create_table "likes", force: :cascade do |t|
