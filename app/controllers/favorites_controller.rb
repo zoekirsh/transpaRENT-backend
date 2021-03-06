@@ -1,8 +1,8 @@
 class FavoritesController < ApplicationController
   skip_before_action :authorized, only: [:index]
 
-  def get_favorites
-    #make the call to api
+  #for a user
+  def my_favorites
     favorites = Favorite.all.select{|f| f.user_id == current_user.id}
 
     render json: favorites, each_serializer: FavoriteSerializer

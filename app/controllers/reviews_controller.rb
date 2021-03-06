@@ -1,9 +1,17 @@
 class ReviewsController < ApplicationController
   skip_before_action :authorized, only: [:index, :show, :get_reviews]
 
+  #for a listing
   def get_reviews
     #byebug
     reviews = Review.all.select{|r| r[:address] == params[:id] }
+
+    render json: reviews, each_serializer: ReviewSerializer
+  end
+
+  #for a user
+  def my_reviews 
+    reviews = Review.all.select{|r| r.user_id == current_user.id}
 
     render json: reviews, each_serializer: ReviewSerializer
   end

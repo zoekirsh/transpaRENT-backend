@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   #customs for fetch
   get '/profile', to: 'users#profile'
-  get '/mylistings', to: 'favorites#get_favorites'
+  get '/mylistings', to: 'favorites#my_favorites'
+  get '/myreviews', to: 'reviews#my_reviews'
 
   #jwt auth 
   post '/signup', to: 'users#create'
