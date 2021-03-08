@@ -38,6 +38,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    Review.find(params[:id]).destroy
+
+    render json: {message: "Review deleted."}
   end
 
   private

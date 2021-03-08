@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #customs (dynamic)
   get '/getreviews/:id', to: 'reviews#get_reviews'
   get '/favorites/:id', to: 'favorites#is_favorite'
 
