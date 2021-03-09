@@ -35,6 +35,10 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    review = Review.find(params[:id])
+    review.update(review_params)
+
+    render json: {review: ReviewSerializer.new(review)}
   end
 
   def destroy
